@@ -7,9 +7,10 @@ module.exports = {
         app: path.resolve(__dirname, '../src/main.ts'),
     },
     resolve: {
-        extensions: ['.js','.ts','.vue'],
+        extensions: ['.js', '.ts', '.vue'],
         alias: {
-            vue: 'vue/dist/vue.js',
+            vue: 'vue/dist/vue.esm.js',
+            "@": path.resolve(__dirname, '../src/')
         }
     },
     output: {
@@ -40,6 +41,14 @@ module.exports = {
                     transpileOnly: true,
                     appendTsSuffixTo: [/.vue$/]
                 }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     }

@@ -3,6 +3,7 @@ const common = require('./webpack.common');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 let prod = {
     mode: 'production',
@@ -23,6 +24,10 @@ let prod = {
             title: 'prod',
             template: path.resolve(__dirname, '../src/index.html')
         })
-    ]
+    ],
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin()],
+    },
 }
 module.exports = merge(common, prod);
